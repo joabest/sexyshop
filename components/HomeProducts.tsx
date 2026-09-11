@@ -8,7 +8,7 @@ export function HomeProducts() {
   const { products } = useShop();
   const active = products.filter((product) => product.active);
   const featured = active.filter((product) => product.featured);
-  const visible = (featured.length ? featured : active).slice(0, 5);
+  const visible = (featured.length >= 8 ? featured : active).slice(0, 20);
 
   return (
     <section className="luxurySection luxuryProducts" id="destaques">
