@@ -2,54 +2,86 @@ import { Header } from "@/components/Header";
 import { HomeHero } from "@/components/HomeHero";
 import { HomeCategories } from "@/components/HomeCategories";
 import { HomeProducts } from "@/components/HomeProducts";
-import { CreditCard, LockKeyhole, PackageCheck, Truck } from "lucide-react";
+import {
+  Facebook,
+  Gift,
+  Heart,
+  Home as HomeIcon,
+  Instagram,
+  Menu,
+  MessageCircle,
+  ShieldCheck,
+  Truck,
+  UserRound,
+  Youtube
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <main>
+    <main className="luxuryStore">
       <Header />
       <HomeHero />
-
-      <section className="benefits" id="discricao">
-        <div><CreditCard/><span><strong>Até 12x</strong> no cartão</span></div>
-        <div><Truck/><span><strong>Frete rápido</strong> com rastreio</span></div>
-        <div><LockKeyhole/><span><strong>Pagamento seguro</strong> e LGPD</span></div>
-        <div><PackageCheck/><span><strong>Embalagem neutra</strong> e discreta</span></div>
-      </section>
-
       <HomeCategories />
       <HomeProducts />
 
-      <section className="promoStrip" id="promocoes">
+      <section className="luxuryTrustBar" id="discricao">
+        <div><Gift/><span><b>EMBALAGEM DISCRETA</b><small>Sua privacidade garantida</small></span></div>
+        <div><ShieldCheck/><span><b>PAGAMENTO SEGURO</b><small>Seus dados protegidos</small></span></div>
+        <div><Truck/><span><b>ENTREGA RÁPIDA</b><small>Para todo o Brasil</small></span></div>
+        <div><MessageCircle/><span><b>ATENDIMENTO VIA WHATSAPP</b><small>Tire suas dúvidas em tempo real</small></span></div>
+      </section>
+
+      <section className="luxuryPromoStrip" id="promocoes">
+        <div className="luxuryPromoCopy">
+          <span>OFERTA ESPECIAL</span>
+          <h2>Prazer, sofisticação e discrição em cada detalhe.</h2>
+          <p>Cadastre promoções, cupons e combos pelo painel administrativo.</p>
+        </div>
+        <a href="#destaques">VER OFERTAS</a>
+      </section>
+
+      <footer className="luxuryFooter" id="atendimento">
+        <div className="luxuryFooterBrand">
+          <div className="footerLogoTitle">CORDEIRO</div>
+          <div className="footerLogoSub">DE LUXXO • SEX SHOP</div>
+          <p>Prazer sem limites ♡</p>
+        </div>
+
         <div>
-          <span className="eyebrow">Oferta do mês</span>
-          <h2>Primeira compra com desconto</h2>
-          <p>Estrutura preparada para cupons, timer de promoção, kits e campanhas sazonais.</p>
+          <b>Institucional</b>
+          <a href="#">Sobre nós</a>
+          <a href="#">Política de privacidade</a>
+          <a href="#">Trocas e devoluções</a>
+          <a href="#">Termos de uso</a>
         </div>
-        <a className="primaryButton whiteButton" href="#destaques">Ver promoções</a>
-      </section>
 
-      <section className="section" id="atendimento">
-        <div className="trustBox">
-          <div>
-            <span className="eyebrow dark">Atendimento discreto</span>
-            <h2>Dúvidas? Fale sem constrangimento.</h2>
-            <p>WhatsApp, Telegram, Instagram, FAQ, rastreio de pedido e páginas institucionais podem ser configurados pelo painel.</p>
+        <div>
+          <b>Ajuda</b>
+          <a href="#">Central de atendimento</a>
+          <a href="#">Rastrear meu pedido</a>
+          <a href="#">Dúvidas frequentes</a>
+          <a href="#">Fale conosco</a>
+        </div>
+
+        <div>
+          <b>Formas de pagamento</b>
+          <div className="paymentRow">
+            <span>VISA</span><span>●●</span><span>PIX</span><span>ELO</span>
           </div>
-          <div className="trustList">
-            <span>✓ Remetente discreto nos e-mails</span>
-            <span>✓ Política de privacidade e LGPD</span>
-            <span>✓ Trocas seguindo regras de higiene</span>
-            <span>✓ Checkout como convidado</span>
+          <b className="socialTitle">Acompanhe a gente</b>
+          <div className="socialRow">
+            <Instagram size={18}/><Facebook size={18}/><Youtube size={19}/>
           </div>
         </div>
-      </section>
-
-      <footer className="footer">
-        <div><strong>Vip SexShop</strong><p>Venda exclusiva para maiores de 18 anos.</p></div>
-        <div><strong>Institucional</strong><a href="#">Privacidade</a><a href="#">Termos</a><a href="#">Trocas</a></div>
-        <div><strong>Atendimento</strong><a href="#">WhatsApp</a><a href="#">FAQ</a><a href="#">Rastrear pedido</a></div>
       </footer>
+
+      <nav className="luxuryMobileBottomNav" aria-label="Navegação mobile">
+        <a href="/"><HomeIcon size={20}/><span>Início</span></a>
+        <a href="#categorias"><Menu size={20}/><span>Categorias</span></a>
+        <a className="whatsappCenter" href="#atendimento"><MessageCircle size={23}/><span>WhatsApp</span></a>
+        <a href="#"><Heart size={20}/><span>Favoritos</span></a>
+        <a href="/admin"><UserRound size={20}/><span>Conta</span></a>
+      </nav>
     </main>
   );
 }
