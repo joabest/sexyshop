@@ -3,42 +3,64 @@
 import Link from "next/link";
 import {
   ChevronDown,
+  Gift,
   Heart,
   LockKeyhole,
   Menu,
+  Percent,
   Search,
   ShoppingCart,
   Truck,
   UserRound,
   X
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useShop } from "@/components/ShopProvider";
 
 const navItems = [
   ["Início", "/"],
   ["Vibradores", "/#destaques"],
+  ["Sugadores", "/#destaques"],
   ["Lingeries", "/#destaques"],
-  ["Bondage", "/#destaques"],
   ["Lubrificantes", "/#destaques"],
   ["Kits & Combos", "/#destaques"],
   ["Bem-estar", "/#categorias"],
-  ["Marcas", "/#categorias"],
+  ["Mais categorias", "/#categorias"],
   ["Promoções", "/#promocoes"]
+];
+
+const offers = [
+  { icon: Truck, text: "FRETE DISCRETO PARA TODO O BRASIL" },
+  { icon: Percent, text: "PRIMEIRA COMPRA: USE O CUPOM PRIMEIRA10 E GANHE 10% OFF" },
+  { icon: Gift, text: "FRETE GRÁTIS EM COMPRAS ACIMA DE R$ 299" },
+  { icon: LockKeyhole, text: "EMBALAGEM 100% DISCRETA E PAGAMENTO SEGURO" },
+  { icon: Heart, text: "OFERTAS ESPECIAIS E COMBOS SELECIONADOS TODA SEMANA" }
 ];
 
 export function Header() {
   const { totalItems, settings } = useShop();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [offerIndex, setOfferIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(
+      () => setOfferIndex((current) => (current + 1) % offers.length),
+      3400
+    );
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const CurrentOfferIcon = offers[offerIndex].icon;
 
   return (
     <>
       <div className="luxuryTopBar">
-        <div className="luxuryTopInner">
-          <span><Truck size={14}/> FRETE DISCRETO PARA TODO O BRASIL</span>
-          <span><LockKeyhole size={14}/> SUA PRIVACIDADE É A NOSSA PRIORIDADE</span>
-          <span><Heart size={14}/> +10.000 CLIENTES SATISFEITOS</span>
-          <b>18+</b>
+        <div className="luxuryTopTicker">
+          <div className="luxuryTopMessage" key={offerIndex}>
+            <CurrentOfferIcon size={14}/>
+            <span>{offerIndex === 0 && settings.announcement ? settings.announcement : offers[offerIndex].text}</span>
+          </div>
+          <b className="luxury18">18+</b>
         </div>
       </div>
 
@@ -87,7 +109,7 @@ export function Header() {
           {navItems.map(([label, href], index) => (
             <Link key={label} href={href} className={index === 0 ? "active" : ""}>
               {label}
-              {label === "Marcas" && <ChevronDown size={13}/>}
+              {label === "Mais categorias" && <ChevronDown size={13}/>}
             </Link>
           ))}
         </nav>
