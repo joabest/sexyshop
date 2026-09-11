@@ -4,8 +4,8 @@ import { ShopProvider } from "@/components/ShopProvider";
 import { AgeGate } from "@/components/AgeGate";
 
 export const metadata: Metadata = {
-  title: "Vip SexShop",
-  description: "Loja adulta com compra e entrega discretas."
+  title: "Cordeiro Deluxxo | Sex Shop",
+  description: "Cordeiro Deluxxo — prazer sem limites, compra segura e entrega discreta para todo o Brasil."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
