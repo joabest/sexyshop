@@ -1544,3 +1544,95 @@ body:has(.luxuryStore){background:#050304}
     height:150px;
   }
 }
+
+
+/* ===== Hotfix: ofertas contínuas + feedback carrinho ===== */
+.luxuryTopBar{
+  height:34px;
+  min-height:34px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+.luxuryMarquee{
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.luxuryMarqueeTrack{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  will-change:transform;
+  animation:luxuryOffersScroll 34s linear infinite;
+}
+.luxuryMarquee:hover .luxuryMarqueeTrack{
+  animation-play-state:paused;
+}
+.luxuryMarqueeItem{
+  height:34px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:0 34px;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.4px;
+}
+.luxuryMarqueeItem:after{
+  content:"•";
+  margin-left:26px;
+  color:#ff73b5;
+}
+.luxuryMarqueeItem svg{
+  color:#ff73b5;
+  flex:0 0 auto;
+}
+@keyframes luxuryOffersScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+.luxuryBuyButton{
+  min-height:38px;
+  padding:8px 10px;
+  line-height:1.05;
+}
+.luxuryBuyButton.added{
+  background:linear-gradient(180deg,#36b86d,#19894a)!important;
+  box-shadow:0 0 16px rgba(54,184,109,.25);
+}
+
+@media(max-width:900px){
+  .luxuryTopBar{
+    height:32px;
+    min-height:32px;
+  }
+  .luxuryMarqueeTrack{
+    animation-duration:27s;
+  }
+  .luxuryMarqueeItem{
+    height:32px;
+    padding:0 24px;
+    font-size:9px;
+  }
+  .luxuryMarqueeItem:after{
+    margin-left:18px;
+  }
+}
+@media(max-width:560px){
+  .luxuryMarqueeTrack{
+    animation-duration:24s;
+  }
+  .luxuryMarqueeItem{
+    padding:0 18px;
+    font-size:8px;
+    letter-spacing:.2px;
+  }
+  .luxuryBuyButton{
+    min-height:40px;
+    font-size:8.5px;
+    padding:7px 6px;
+  }
+}
