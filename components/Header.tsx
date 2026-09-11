@@ -14,7 +14,7 @@ import {
   UserRound,
   X
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useShop } from "@/components/ShopProvider";
 
 const navItems = [
@@ -31,36 +31,37 @@ const navItems = [
 
 const offers = [
   { icon: Truck, text: "FRETE DISCRETO PARA TODO O BRASIL" },
-  { icon: Percent, text: "PRIMEIRA COMPRA: USE O CUPOM PRIMEIRA10 E GANHE 10% OFF" },
+  { icon: Percent, text: "USE O CUPOM PRIMEIRA10 E GANHE 10% OFF NA PRIMEIRA COMPRA" },
   { icon: Gift, text: "FRETE GRÁTIS EM COMPRAS ACIMA DE R$ 299" },
   { icon: LockKeyhole, text: "EMBALAGEM 100% DISCRETA E PAGAMENTO SEGURO" },
-  { icon: Heart, text: "OFERTAS ESPECIAIS E COMBOS SELECIONADOS TODA SEMANA" }
+  { icon: Heart, text: "OFERTAS E COMBOS ESPECIAIS TODA SEMANA" }
 ];
+
+function OfferTrack() {
+  return (
+    <>
+      {offers.map(({ icon: Icon, text }) => (
+        <span className="luxuryMarqueeItem" key={text}>
+          <Icon size={14}/>
+          <b>{text}</b>
+        </span>
+      ))}
+    </>
+  );
+}
 
 export function Header() {
   const { totalItems, settings } = useShop();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [offerIndex, setOfferIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = window.setInterval(
-      () => setOfferIndex((current) => (current + 1) % offers.length),
-      3400
-    );
-    return () => window.clearInterval(timer);
-  }, []);
-
-  const CurrentOfferIcon = offers[offerIndex].icon;
 
   return (
     <>
-      <div className="luxuryTopBar">
-        <div className="luxuryTopTicker">
-          <div className="luxuryTopMessage" key={offerIndex}>
-            <CurrentOfferIcon size={14}/>
-            <span>{offerIndex === 0 && settings.announcement ? settings.announcement : offers[offerIndex].text}</span>
+      <div className="luxuryTopBar" aria-label={settings.announcement}>
+        <div className="luxuryMarquee">
+          <div className="luxuryMarqueeTrack">
+            <OfferTrack />
+            <OfferTrack />
           </div>
-          <b className="luxury18">18+</b>
         </div>
       </div>
 
