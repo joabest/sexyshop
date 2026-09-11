@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useShop } from "@/components/ShopProvider";
 
 export function AgeGate() {
+  const { settings, hydrated } = useShop();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (!hydrated || !settings.adultGate) {
+      setOpen(false);
+      return;
+    }
     setOpen(localStorage.getItem("adult-confirmed") !== "yes");
-  }, []);
+  }, [hydrated, settings.adultGate]);
 
   if (!open) return null;
 
@@ -27,7 +33,7 @@ export function AgeGate() {
           >
             Tenho 18 anos ou mais
           </button>
-          <button className="ghostButton" onClick={() => window.location.href = "https://www.google.com"}>
+          <button className="ghostButton" onClick={() => (window.location.href = "https://www.google.com")}>
             Sair
           </button>
         </div>

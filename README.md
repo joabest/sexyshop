@@ -1,18 +1,58 @@
 # Vip SexShop
 
-Primeira versão do e-commerce criada em Next.js 16 + React 19.
+E-commerce em Next.js 16 + React 19, com loja pública e painel administrativo.
 
-## Já implementado
+## Painel administrativo
 
-- Layout responsivo mobile-first inspirado na referência enviada.
-- Gate obrigatório de idade 18+.
-- Home com hero, categorias, benefícios, promoções e produtos.
-- Catálogo demonstrativo e página individual de produto.
-- Carrinho persistido no navegador.
-- Checkout demonstrativo.
-- Painel administrativo inicial.
-- **Cores principal, secundária e dos botões editáveis pelo painel admin** em `/admin`.
-- Estrutura visual para discrição, LGPD, embalagens neutras e atendimento.
+A rota `/admin` agora é protegida por login e permite:
+
+- dashboard com produtos, estoque, pedidos e vendas;
+- cadastrar, editar e excluir produtos;
+- controlar preço, preço promocional, estoque, categoria, imagem, status e destaque na home;
+- acompanhar pedidos e alterar status;
+- editar categorias;
+- alterar cores do tema;
+- editar nome da loja, barra de ofertas, WhatsApp, Instagram, Telegram e horário de atendimento;
+- editar título e texto principal da home;
+- ativar/desativar o gate 18+;
+- publicar as configurações no Supabase.
+
+As mudanças também ficam em cache local para facilitar desenvolvimento e preview.
+
+## Segurança do painel
+
+Configure na Vercel:
+
+```env
+ADMIN_PASSWORD=uma-senha-forte
+ADMIN_SESSION_SECRET=uma-chave-longa-e-aleatoria
+```
+
+Sem essas variáveis, o painel não libera o acesso.
+
+## Supabase
+
+1. Crie um projeto no Supabase.
+2. Execute `supabase/schema.sql` no SQL Editor.
+3. Configure na Vercel:
+
+```env
+SUPABASE_URL=https://SEU-PROJETO.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=SUA_SERVICE_ROLE_KEY
+```
+
+A service role é usada apenas em rotas server-side e nunca deve ser exposta no navegador.
+
+Sem Supabase, o projeto funciona em **modo local**: produtos/configurações/pedidos ficam apenas no navegador usado para administrar/testar. Com Supabase configurado, a publicação do painel fica disponível para todos os visitantes e os pedidos passam a ser persistidos na nuvem.
+
+## Rotas principais
+
+- `/` loja
+- `/produto/[slug]` produto
+- `/carrinho` carrinho
+- `/checkout` checkout
+- `/admin-login` login administrativo
+- `/admin` painel
 
 ## Rodar localmente
 
@@ -21,19 +61,8 @@ npm install
 npm run dev
 ```
 
-Abra `http://localhost:3000`.
+Copie `.env.example` para `.env.local` e preencha as credenciais.
 
-## Próxima fase para produção
+## Próximas integrações
 
-Para ativar operações reais, conectar:
-- PostgreSQL (Neon/Supabase) + Prisma;
-- autenticação segura do painel;
-- cadastro real de produtos, estoque, categorias, banners e cupons;
-- gateway (Mercado Pago/Pagar.me);
-- cálculo de frete por CEP;
-- upload de imagens;
-- e-mails transacionais;
-- WhatsApp e rastreio;
-- persistência global das configurações de tema no banco.
-
-A aplicação atual foi propositalmente feita para já abrir e funcionar sem variáveis de ambiente, facilitando preview e deploy inicial na Vercel.
+A estrutura já está pronta para receber gateway de pagamento, cálculo real de frete, upload de imagens, cupons avançados, e-mails transacionais, rastreio e programa de fidelidade.

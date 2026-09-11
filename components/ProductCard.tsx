@@ -7,6 +7,7 @@ import { useShop } from "@/components/ShopProvider";
 
 export function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useShop();
+  const soldOut = product.stock <= 0;
 
   return (
     <article className="productCard">
@@ -19,9 +20,9 @@ export function ProductCard({ product }: { product: Product }) {
         <Link href={"/produto/" + product.slug}><h3>{product.name}</h3></Link>
         {product.oldPrice && <span className="oldPrice">{money(product.oldPrice)}</span>}
         <div className="price">{money(product.price)}</div>
-        <div className="pixText">ou 5% de desconto no Pix</div>
-        <button className="buyButton" onClick={() => addToCart(product)}>
-          <ShoppingBag size={17}/> Adicionar
+        <div className="pixText">{soldOut ? "Indisponível" : "ou 5% de desconto no Pix"}</div>
+        <button className="buyButton" disabled={soldOut} onClick={() => addToCart(product)}>
+          <ShoppingBag size={17}/> {soldOut ? "Sem estoque" : "Adicionar"}
         </button>
       </div>
     </article>

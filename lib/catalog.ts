@@ -8,9 +8,12 @@ export type Product = {
   image: string;
   badge?: string;
   description: string;
+  stock: number;
+  active: boolean;
+  featured: boolean;
 };
 
-export const categories = [
+export const defaultCategories = [
   "Vibradores",
   "Plugs",
   "Lubrificantes",
@@ -21,7 +24,7 @@ export const categories = [
   "Kits & Combos"
 ];
 
-export const products: Product[] = [
+export const defaultProducts: Product[] = [
   {
     id: 1,
     slug: "vibrador-sense-mini",
@@ -31,7 +34,10 @@ export const products: Product[] = [
     oldPrice: 159.9,
     image: "https://images.unsplash.com/photo-1580915411954-282cb1f2b8ce?auto=format&fit=crop&w=900&q=80",
     badge: "Mais vendido",
-    description: "Produto demonstrativo. Cadastro completo, variações, estoque e fotos serão gerenciados pelo painel."
+    description: "Produto demonstrativo. Edite nome, preço, fotos, estoque, categoria e descrição no painel administrativo.",
+    stock: 18,
+    active: true,
+    featured: true
   },
   {
     id: 2,
@@ -41,7 +47,10 @@ export const products: Product[] = [
     price: 189.9,
     image: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=900&q=80",
     badge: "Combo",
-    description: "Kit demonstrativo com apresentação discreta e elegante."
+    description: "Kit demonstrativo com apresentação discreta e elegante.",
+    stock: 9,
+    active: true,
+    featured: true
   },
   {
     id: 3,
@@ -51,7 +60,10 @@ export const products: Product[] = [
     price: 49.9,
     image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=900&q=80",
     badge: "Oferta",
-    description: "Produto demonstrativo para composição visual da loja."
+    description: "Produto demonstrativo para composição visual da loja.",
+    stock: 31,
+    active: true,
+    featured: true
   },
   {
     id: 4,
@@ -60,7 +72,10 @@ export const products: Product[] = [
     category: "Fantasias & Lingerie",
     price: 119.9,
     image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&q=80",
-    description: "Peça demonstrativa. Tamanhos e variações poderão ser cadastrados no painel."
+    description: "Peça demonstrativa. Tamanhos e variações poderão ser cadastrados no painel.",
+    stock: 14,
+    active: true,
+    featured: true
   }
 ];
 
