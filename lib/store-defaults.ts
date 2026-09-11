@@ -28,20 +28,20 @@ export type StoreData = {
 
 export const defaultStoreData: StoreData = {
   theme: {
-    primary: "#ff2f68",
-    secondary: "#111111",
-    button: "#ff2f68"
+    primary: "#ff0a78",
+    secondary: "#070305",
+    button: "#f20a6b"
   },
   settings: {
-    storeName: "Vip SexShop",
-    announcement: "Frete grátis em compras acima de R$ 299 • Embalagem 100% discreta",
+    storeName: "Cordeiro Deluxxo",
+    announcement: "Frete discreto para todo o Brasil • Sua privacidade é a nossa prioridade",
     whatsapp: "",
     telegram: "",
     instagram: "",
     supportHours: "Seg. a Sex. das 09h às 18h",
     freeShippingFrom: 299,
-    heroTitle: "Prazer, bem-estar e discrição em uma experiência elegante.",
-    heroSubtitle: "Produtos selecionados, pagamento seguro e embalagem neutra. Nada na caixa revela o conteúdo da compra.",
+    heroTitle: "Descubra um mundo de prazer sem limites",
+    heroSubtitle: "Produtos selecionados para uma vida mais intensa, livre e prazerosa — sempre com discrição.",
     adultGate: true
   },
   categories: defaultCategories,
