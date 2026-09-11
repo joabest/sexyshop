@@ -49,10 +49,10 @@ function normalizeStore(raw?: Partial<StoreData> | null): StoreData {
       : defaultStoreData.categories,
     products: Array.isArray(raw?.products) && raw!.products!.length
       ? raw!.products!.map((p) => ({
-          stock: 0,
-          active: true,
-          featured: false,
-          ...p
+          ...p,
+          stock: typeof p.stock === "number" ? p.stock : 0,
+          active: typeof p.active === "boolean" ? p.active : true,
+          featured: typeof p.featured === "boolean" ? p.featured : false
         }))
       : defaultStoreData.products
   };
