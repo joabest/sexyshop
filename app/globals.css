@@ -1080,3 +1080,88 @@ body:has(.luxuryStore){background:#050304}
   .luxuryFooter{grid-template-columns:1fr;padding:28px 20px 105px;gap:24px}
   .luxuryFooter>div:not(.luxuryFooterBrand){padding-top:7px;border-top:1px solid rgba(255,255,255,.08)}
 }
+
+
+/* Refinamentos com os assets oficiais da identidade visual */
+.luxuryLogo{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  text-align:left;
+}
+.luxuryLogoImage{
+  width:68px;
+  height:68px;
+  flex:0 0 68px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 8px rgba(255,10,120,.24));
+}
+.luxuryLogoWords{
+  min-width:0;
+  display:grid;
+  align-content:center;
+  line-height:1;
+}
+.luxuryLogoCrown{display:none}
+.luxuryLogoMain{margin-top:0}
+.luxuryHeroVisual{
+  min-height:410px;
+  display:flex;
+  align-items:stretch;
+  justify-content:flex-end;
+}
+.luxuryHeroPhotoFrame{
+  position:relative;
+  width:min(100%,560px);
+  min-height:410px;
+  overflow:hidden;
+  border-left:1px solid rgba(255,22,130,.32);
+  border-top:1px solid rgba(255,22,130,.42);
+  border-bottom:1px solid rgba(214,165,74,.28);
+  box-shadow:-18px 0 45px rgba(0,0,0,.26),0 0 28px rgba(255,10,120,.13);
+}
+.luxuryHeroPhotoFrame:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,#050304 0%,rgba(5,3,4,.72) 9%,transparent 28%),
+    linear-gradient(180deg,transparent 70%,rgba(5,3,4,.28) 100%);
+}
+.luxuryHeroPhoto{
+  width:100%;
+  height:100%;
+  min-height:410px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  filter:saturate(1.08) contrast(1.04);
+}
+@media(max-width:900px){
+  .luxuryLogoImage{width:54px;height:54px;flex-basis:54px}
+  .luxuryLogoWords{display:none}
+  .luxuryHeroVisual{
+    position:absolute;
+    right:-46px;
+    top:76px;
+    width:62%;
+    height:455px;
+    min-height:455px;
+    opacity:.63;
+  }
+  .luxuryHeroPhotoFrame,.luxuryHeroPhoto{min-height:455px;height:455px}
+  .luxuryHeroPhotoFrame{width:100%;border-radius:0}
+  .luxuryHeroPhotoFrame:before{
+    background:
+      linear-gradient(90deg,#050304 0%,rgba(5,3,4,.62) 16%,transparent 46%),
+      linear-gradient(180deg,rgba(5,3,4,.08),rgba(5,3,4,.52));
+  }
+}
+@media(max-width:560px){
+  .luxuryLogo{justify-content:center}
+  .luxuryLogoImage{width:58px;height:58px;flex-basis:58px}
+  .luxuryHeroVisual{right:-84px;width:82%;opacity:.56}
+}
