@@ -3,9 +3,7 @@
 import {
   ArrowRight,
   Gift,
-  Heart,
   ShieldCheck,
-  Sparkles,
   Truck
 } from "lucide-react";
 import { useShop } from "@/components/ShopProvider";
@@ -36,19 +34,13 @@ export function HomeHero() {
         </a>
       </div>
 
-      <div className="luxuryHeroVisual" aria-hidden="true">
-        <div className="luxuryFabric luxuryFabricOne"/>
-        <div className="luxuryFabric luxuryFabricTwo"/>
-        <div className="luxuryHeartFrame">
-          <Heart size={180} strokeWidth={1.2}/>
-          <div className="luxurySilhouette">
-            <Sparkles size={48}/>
-          </div>
-        </div>
-        <div className="luxuryHeroPhrase">
-          <span>Mais que produtos,</span>
-          <strong>é liberdade</strong>
-          <Heart size={22}/>
+      <div className="luxuryHeroVisual">
+        <div className="luxuryHeroPhotoFrame">
+          <img
+            className="luxuryHeroPhoto"
+            src="/cordeiro-hero.webp"
+            alt="Visual Cordeiro Deluxxo"
+          />
         </div>
       </div>
     </section>
