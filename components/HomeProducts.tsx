@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight, Gift, Heart } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 import { useShop } from "@/components/ShopProvider";
 
@@ -7,24 +8,33 @@ export function HomeProducts() {
   const { products } = useShop();
   const active = products.filter((product) => product.active);
   const featured = active.filter((product) => product.featured);
-  const visible = (featured.length ? featured : active).slice(0, 8);
+  const visible = (featured.length ? featured : active).slice(0, 5);
 
   return (
-    <section className="section softSection" id="destaques">
-      <div className="sectionHeader">
-        <div><span className="eyebrow dark">Seleção especial</span><h2>Mais vendidos</h2></div>
-        <span className="mutedText">{active.length} produtos ativos</span>
+    <section className="luxurySection luxuryProducts" id="destaques">
+      <div className="luxurySectionTitle compactTitle">
+        <span className="goldRule"/>
+        <div>
+          <b>MAIS VENDIDOS</b>
+          <small>OS FAVORITOS DOS NOSSOS CLIENTES</small>
+        </div>
+        <span className="goldRule"/>
       </div>
-      {visible.length ? (
-        <div className="productGrid">
+
+      <div className="luxuryProductLayout">
+        <div className="luxuryProductGrid">
           {visible.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
-      ) : (
-        <div className="emptyState">
-          <h3>Nenhum produto ativo no momento.</h3>
-          <p>Ative produtos no painel administrativo.</p>
-        </div>
-      )}
+
+        <a className="luxuryComboCard" href="#promocoes">
+          <div className="luxuryComboGlow"/>
+          <span>COMBOS</span>
+          <strong>QUE ELEVAM<br/>O PRAZER</strong>
+          <p>Mais felicidade.<br/>Mais conexão.<br/>Mais por menos.</p>
+          <div className="luxuryGiftOrb"><Gift size={54}/><Heart size={26}/></div>
+          <b className="luxuryComboButton">VER COMBOS <ArrowRight size={16}/></b>
+        </a>
+      </div>
     </section>
   );
 }
