@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingCart, Star } from "lucide-react";
 import { money, type Product } from "@/lib/catalog";
 import { useShop } from "@/components/ShopProvider";
 
@@ -10,19 +10,28 @@ export function ProductCard({ product }: { product: Product }) {
   const soldOut = product.stock <= 0;
 
   return (
-    <article className="productCard">
-      <Link href={"/produto/" + product.slug} className="productImageWrap">
-        {product.badge && <span className="badge">{product.badge}</span>}
+    <article className="productCard luxuryProductCard">
+      <Link href={"/produto/" + product.slug} className="productImageWrap luxuryProductImageWrap">
+        {product.badge && <span className="badge luxuryBadge">{product.badge}</span>}
         <img src={product.image} alt={product.name} className="productImage" />
+        <span className="luxuryProductShine"/>
       </Link>
-      <div className="productBody">
-        <span className="productCategory">{product.category}</span>
+
+      <div className="productBody luxuryProductBody">
         <Link href={"/produto/" + product.slug}><h3>{product.name}</h3></Link>
-        {product.oldPrice && <span className="oldPrice">{money(product.oldPrice)}</span>}
-        <div className="price">{money(product.price)}</div>
-        <div className="pixText">{soldOut ? "Indisponível" : "ou 5% de desconto no Pix"}</div>
-        <button className="buyButton" disabled={soldOut} onClick={() => addToCart(product)}>
-          <ShoppingBag size={17}/> {soldOut ? "Sem estoque" : "Adicionar"}
+
+        <div className="luxuryRating" aria-label="5 estrelas">
+          {[0,1,2,3,4].map((n) => <Star key={n} size={12} fill="currentColor"/>)}
+          <small>({90 + product.id * 17})</small>
+        </div>
+
+        <div className="luxuryPriceLine">
+          <div className="price">{money(product.price)}</div>
+          {product.oldPrice && <span className="oldPrice">{money(product.oldPrice)}</span>}
+        </div>
+
+        <button className="buyButton luxuryBuyButton" disabled={soldOut} onClick={() => addToCart(product)}>
+          <ShoppingCart size={16}/> {soldOut ? "Sem estoque" : "Adicionar"}
         </button>
       </div>
     </article>
