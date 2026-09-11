@@ -1,23 +1,46 @@
 "use client";
 
+import {
+  Droplets,
+  Gift,
+  Heart,
+  Package,
+  ShieldCheck,
+  Sparkles,
+  Star
+} from "lucide-react";
 import { useShop } from "@/components/ShopProvider";
+
+const iconMap = [Sparkles, Heart, ShieldCheck, Droplets, Gift, Star, Package];
 
 export function HomeCategories() {
   const { categories } = useShop();
 
   return (
-    <section className="section" id="categorias">
-      <div className="sectionHeader">
-        <div><span className="eyebrow dark">Explore</span><h2>Categorias</h2></div>
-        <p>Organização clara para encontrar o produto ideal sem perder tempo.</p>
+    <section className="luxurySection luxuryCategories" id="categorias">
+      <div className="luxurySectionTitle">
+        <span className="goldRule"/>
+        <div>
+          <b>NOSSAS CATEGORIAS</b>
+          <small>EXPLORE O SEU PRAZER</small>
+        </div>
+        <span className="goldRule"/>
       </div>
-      <div className="categoryGrid">
-        {categories.map((category, index) => (
-          <a className="categoryTile" href="#destaques" key={category}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{category}</strong>
-          </a>
-        ))}
+
+      <div className="luxuryCategoryGrid">
+        {categories.slice(0, 7).map((category, index) => {
+          const Icon = iconMap[index % iconMap.length];
+          return (
+            <a className="luxuryCategoryItem" href="#destaques" key={category}>
+              <div className="luxuryCategoryCircle">
+                <div className="luxuryCategoryGlow"/>
+                <Icon size={42} strokeWidth={1.5}/>
+              </div>
+              <strong>{category}</strong>
+              <span>Ver produtos →</span>
+            </a>
+          );
+        })}
       </div>
     </section>
   );
