@@ -3,7 +3,6 @@
 import Link from "next/link";
 import {
   ChevronDown,
-  Crown,
   Heart,
   LockKeyhole,
   Menu,
@@ -54,10 +53,12 @@ export function Header() {
           </button>
 
           <Link href="/" className="luxuryLogo" aria-label={settings.storeName}>
-            <Crown className="luxuryLogoCrown" size={26}/>
-            <span className="luxuryLogoMain">CORDEIRO</span>
-            <span className="luxuryLogoSub">DE LUXXO</span>
-            <span className="luxuryLogoTag">SEX SHOP • Prazer sem limites</span>
+            <img className="luxuryLogoImage" src="/cordeiro-logo.webp" alt="Cordeiro Deluxxo" />
+            <span className="luxuryLogoWords">
+              <span className="luxuryLogoMain">CORDEIRO</span>
+              <span className="luxuryLogoSub">DE LUXXO</span>
+              <span className="luxuryLogoTag">SEX SHOP • Prazer sem limites</span>
+            </span>
           </Link>
 
           <div className="searchBox luxurySearch">
