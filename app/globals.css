@@ -1165,3 +1165,382 @@ body:has(.luxuryStore){background:#050304}
   .luxuryLogoImage{width:58px;height:58px;flex-basis:58px}
   .luxuryHeroVisual{right:-84px;width:82%;opacity:.56}
 }
+
+
+/* ===== Ajustes 2026-09: ticker, catálogo ampliado e mobile-first ===== */
+.luxuryTopBar{
+  overflow:hidden;
+  min-height:32px;
+}
+.luxuryTopTicker{
+  position:relative;
+  max-width:1320px;
+  min-height:32px;
+  margin:0 auto;
+  padding:0 22px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+}
+.luxuryTopMessage{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.45px;
+  text-align:center;
+  animation:luxTopSwap .5s ease both;
+}
+.luxuryTopMessage svg{
+  flex:0 0 auto;
+  color:#ff75b7;
+}
+.luxuryTopMessage span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.luxury18{
+  justify-self:end;
+  min-width:42px;
+  color:#fff;
+  font-size:16px;
+  text-align:right;
+}
+@keyframes luxTopSwap{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.luxuryHero,
+.luxuryHeroVisual,
+.luxuryHeroPhotoFrame{
+  max-width:100%;
+}
+.luxuryHero{
+  overflow:hidden;
+}
+.luxuryHero h1 span{
+  width:auto;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.luxuryHeroContent{
+  min-width:0;
+}
+.luxuryHeroPhoto{
+  object-position:center center;
+}
+
+.luxuryCategoryGrid{
+  grid-template-columns:repeat(7,minmax(0,1fr));
+}
+.luxuryCategoryItem{
+  min-width:0;
+}
+.luxuryCategoryItem strong{
+  overflow-wrap:anywhere;
+}
+
+.luxuryProductLayout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+.luxuryProductGrid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.luxuryProductGrid .luxuryProductCard{
+  display:block!important;
+}
+.luxuryComboCard{
+  min-height:210px;
+}
+
+@media(max-width:1180px){
+  .luxuryCategoryGrid{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+  }
+  .luxuryProductGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .luxuryProductGrid .luxuryProductCard{
+    display:block!important;
+  }
+}
+
+@media(max-width:900px){
+  html,body{overflow-x:hidden}
+  .luxuryTopTicker{
+    min-height:32px;
+    padding:0 12px;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:8px;
+  }
+  .luxuryTopMessage{
+    justify-content:flex-start;
+    font-size:9px;
+    letter-spacing:.15px;
+  }
+  .luxury18{
+    min-width:36px;
+    font-size:15px;
+  }
+
+  .luxuryHeaderMain{
+    width:100%;
+    max-width:100%;
+    min-height:82px;
+    padding:8px 14px;
+    justify-content:space-between;
+  }
+  .luxuryMobileToggle{
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+  }
+  .luxuryLogo{
+    flex:1 1 auto;
+    width:auto;
+    min-width:0;
+    justify-content:center;
+  }
+  .luxuryLogoImage{
+    width:68px;
+    height:68px;
+    flex:0 0 68px;
+  }
+  .luxuryQuickNav{
+    flex:0 0 44px;
+    width:44px;
+    margin:0;
+  }
+  .luxuryQuickNav a{
+    display:none!important;
+  }
+  .luxuryQuickNav .cartLink{
+    display:flex!important;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    align-items:center;
+    justify-content:center;
+  }
+  .luxuryQuickNav .cartLink b{
+    right:-3px;
+    top:-3px;
+  }
+
+  .luxuryHero{
+    position:relative;
+    min-height:auto;
+    padding:0;
+    display:block;
+    isolation:isolate;
+  }
+  .luxuryHeroVisual{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    opacity:.42;
+    z-index:0;
+    pointer-events:none;
+  }
+  .luxuryHeroPhotoFrame,
+  .luxuryHeroPhoto{
+    width:100%;
+    height:100%;
+    min-height:100%;
+  }
+  .luxuryHeroPhotoFrame{
+    border:0;
+    box-shadow:none;
+  }
+  .luxuryHeroPhoto{
+    object-fit:cover;
+    object-position:68% center;
+  }
+  .luxuryHeroPhotoFrame:before{
+    background:
+      linear-gradient(90deg,rgba(5,3,4,.98) 0%,rgba(5,3,4,.86) 45%,rgba(5,3,4,.46) 100%),
+      linear-gradient(180deg,rgba(5,3,4,.18) 0%,rgba(5,3,4,.18) 72%,rgba(5,3,4,.92) 100%);
+  }
+  .luxuryHeroContent{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:680px;
+    min-height:570px;
+    padding:58px 28px 46px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+  }
+  .luxuryHeroKicker{
+    margin:0 0 8px;
+  }
+  .luxuryHero h1{
+    width:100%;
+    max-width:620px;
+  }
+  .luxuryHero h1 span{
+    width:100%;
+    max-width:100%;
+    font-size:clamp(38px,8.8vw,58px);
+    line-height:.98;
+    letter-spacing:-1.2px;
+    white-space:normal;
+  }
+  .luxuryHero h1 em{
+    max-width:100%;
+    font-size:clamp(46px,11vw,69px);
+    line-height:1;
+  }
+  .luxuryHero p{
+    width:min(100%,520px);
+    max-width:100%;
+    font-size:14px;
+    line-height:1.55;
+  }
+  .luxuryHeroTrust{
+    width:min(100%,430px);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 18px;
+  }
+  .luxuryCta{
+    width:min(100%,420px);
+    min-width:0;
+  }
+
+  .luxuryCategoryGrid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:18px 10px;
+  }
+  .luxuryCategoryItem:nth-child(n){
+    display:flex!important;
+  }
+  .luxuryCategoryCircle{
+    width:86px;
+    height:86px;
+  }
+
+  .luxuryProductGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .luxuryProductGrid .luxuryProductCard:nth-child(n){
+    display:block!important;
+  }
+  .luxuryProductImageWrap{
+    height:200px;
+  }
+  .luxuryComboCard{
+    min-height:180px;
+  }
+}
+
+@media(max-width:560px){
+  .luxuryTopMessage span{
+    font-size:8px;
+  }
+  .luxuryHeroContent{
+    min-height:550px;
+    padding:48px 18px 38px;
+  }
+  .luxuryHero h1 span{
+    font-size:clamp(34px,10.3vw,46px);
+    line-height:1.02;
+    letter-spacing:-1px;
+  }
+  .luxuryHero h1 em{
+    font-size:clamp(45px,14vw,61px);
+  }
+  .luxuryHero p{
+    width:100%;
+    max-width:360px;
+  }
+  .luxuryHeroTrust{
+    max-width:350px;
+    gap:12px 10px;
+  }
+  .luxuryHeroTrust>div{
+    min-width:0;
+  }
+  .luxuryHeroTrust span{
+    font-size:8px;
+  }
+  .luxuryCta{
+    width:100%;
+    max-width:440px;
+    min-width:0;
+  }
+
+  .luxurySection{
+    padding-left:12px;
+    padding-right:12px;
+  }
+  .luxuryCategoryGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px 8px;
+  }
+  .luxuryCategoryCircle{
+    width:76px;
+    height:76px;
+  }
+  .luxuryCategoryItem strong{
+    font-size:9px;
+    line-height:1.2;
+  }
+
+  .luxuryProductGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  .luxuryProductImageWrap{
+    height:165px;
+  }
+  .luxuryProductBody{
+    padding:9px 8px;
+  }
+  .luxuryProductBody h3{
+    min-height:29px;
+    font-size:10px;
+  }
+  .luxuryComboCard{
+    min-height:165px;
+  }
+}
+
+@media(max-width:390px){
+  .luxuryHeroContent{
+    min-height:530px;
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .luxuryHero h1 span{
+    font-size:32px;
+  }
+  .luxuryHero h1 em{
+    font-size:45px;
+  }
+  .luxuryCategoryGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .luxuryCategoryCircle{
+    width:68px;
+    height:68px;
+  }
+  .luxuryProductImageWrap{
+    height:150px;
+  }
+}
