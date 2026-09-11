@@ -39,22 +39,47 @@ type ShopContextType = {
 };
 
 const ShopContext = createContext<ShopContextType | null>(null);
+const STORE_CACHE_KEY = "shop-store-cache-v3";
+const CART_KEY = "shop-cart-v2";
+
+function normalizeProduct(product: Product): Product {
+  return {
+    ...product,
+    stock: typeof product.stock === "number" ? product.stock : 0,
+    active: typeof product.active === "boolean" ? product.active : true,
+    featured: typeof product.featured === "boolean" ? product.featured : false
+  };
+}
+
+function mergeProducts(rawProducts?: Product[]) {
+  const defaults = defaultStoreData.products.map(normalizeProduct);
+  if (!Array.isArray(rawProducts) || rawProducts.length === 0) return defaults;
+
+  const savedBySlug = new Map(rawProducts.map((p) => [p.slug, normalizeProduct(p)]));
+  const merged = defaults.map((fallback) => {
+    const saved = savedBySlug.get(fallback.slug);
+    return saved ? { ...fallback, ...saved } : fallback;
+  });
+
+  const defaultSlugs = new Set(defaults.map((p) => p.slug));
+  const custom = rawProducts
+    .filter((p) => !defaultSlugs.has(p.slug))
+    .map(normalizeProduct);
+
+  return [...merged, ...custom];
+}
 
 function normalizeStore(raw?: Partial<StoreData> | null): StoreData {
+  const rawCategories = Array.isArray(raw?.categories) ? raw!.categories! : [];
+  const categories = Array.from(
+    new Set([...defaultStoreData.categories, ...rawCategories].filter(Boolean))
+  );
+
   return {
     theme: { ...defaultStoreData.theme, ...(raw?.theme || {}) },
     settings: { ...defaultStoreData.settings, ...(raw?.settings || {}) },
-    categories: Array.isArray(raw?.categories) && raw!.categories!.length
-      ? raw!.categories!
-      : defaultStoreData.categories,
-    products: Array.isArray(raw?.products) && raw!.products!.length
-      ? raw!.products!.map((p) => ({
-          ...p,
-          stock: typeof p.stock === "number" ? p.stock : 0,
-          active: typeof p.active === "boolean" ? p.active : true,
-          featured: typeof p.featured === "boolean" ? p.featured : false
-        }))
-      : defaultStoreData.products
+    categories,
+    products: mergeProducts(raw?.products as Product[] | undefined)
   };
 }
 
@@ -65,6 +90,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
   const [categories, setCategories] = useState<string[]>(defaultStoreData.categories);
   const [products, setProducts] = useState<Product[]>(defaultStoreData.products);
   const [hydrated, setHydrated] = useState(false);
+  const [cartHydrated, setCartHydrated] = useState(false);
 
   const applyStore = (data: StoreData) => {
     const normalized = normalizeStore(data);
@@ -78,10 +104,18 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
     let cancelled = false;
 
     try {
-      const savedCart = localStorage.getItem("shop-cart");
-      if (savedCart) setCart(JSON.parse(savedCart));
+      const savedCart = localStorage.getItem(CART_KEY) || localStorage.getItem("shop-cart");
+      if (savedCart) {
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) setCart(parsed);
+      }
+    } catch {}
+    setCartHydrated(true);
 
-      const cached = localStorage.getItem("shop-store-cache");
+    try {
+      const cached =
+        localStorage.getItem(STORE_CACHE_KEY) ||
+        localStorage.getItem("shop-store-cache");
       if (cached) applyStore(JSON.parse(cached));
     } catch {}
 
@@ -89,7 +123,9 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
       try {
         const response = await fetch("/api/store", { cache: "no-store" });
         const payload = await response.json();
-        if (!cancelled && response.ok && payload?.mode === "cloud" && payload?.data) {
+        if (!cancelled && response.ok && payload?.data) {
+          // Mesmo em modo local, normalizamos com o catálogo novo para impedir
+          // que caches antigos reduzam a quantidade de produtos.
           applyStore(payload.data);
         }
       } catch {
@@ -110,28 +146,31 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
   }, [theme]);
 
   useEffect(() => {
-    localStorage.setItem("shop-cart", JSON.stringify(cart));
-  }, [cart]);
+    if (!cartHydrated) return;
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }, [cart, cartHydrated]);
 
   useEffect(() => {
     if (!hydrated) return;
     localStorage.setItem(
-      "shop-store-cache",
+      STORE_CACHE_KEY,
       JSON.stringify({ theme, settings, categories, products })
     );
   }, [hydrated, theme, settings, categories, products]);
 
   const addToCart = (product: Product) => {
     if (!product.active || product.stock <= 0) return;
+
     setCart((items) => {
       const found = items.find((item) => item.id === product.id);
-      return found
-        ? items.map((item) =>
-            item.id === product.id
-              ? { ...item, qty: Math.min(item.qty + 1, product.stock) }
-              : item
-          )
-        : [...items, { ...product, qty: 1 }];
+      if (found) {
+        return items.map((item) =>
+          item.id === product.id
+            ? { ...item, qty: Math.min(item.qty + 1, Math.max(product.stock, 1)) }
+            : item
+        );
+      }
+      return [...items, { ...product, qty: 1 }];
     });
   };
 
