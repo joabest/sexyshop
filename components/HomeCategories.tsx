@@ -1,17 +1,38 @@
 "use client";
 
 import {
+  Circle,
   Droplets,
+  Flame,
   Gift,
   Heart,
+  LockKeyhole,
   Package,
+  Percent,
   ShieldCheck,
+  ShoppingBag,
   Sparkles,
-  Star
+  Star,
+  Zap
 } from "lucide-react";
 import { useShop } from "@/components/ShopProvider";
 
-const iconMap = [Sparkles, Heart, ShieldCheck, Droplets, Gift, Star, Package];
+const iconMap = [
+  Sparkles,
+  Zap,
+  Circle,
+  Heart,
+  Star,
+  Droplets,
+  Sparkles,
+  LockKeyhole,
+  Flame,
+  Gift,
+  Package,
+  ShoppingBag,
+  Percent,
+  ShieldCheck
+];
 
 export function HomeCategories() {
   const { categories } = useShop();
@@ -28,13 +49,13 @@ export function HomeCategories() {
       </div>
 
       <div className="luxuryCategoryGrid">
-        {categories.slice(0, 7).map((category, index) => {
+        {categories.map((category, index) => {
           const Icon = iconMap[index % iconMap.length];
           return (
             <a className="luxuryCategoryItem" href="#destaques" key={category}>
               <div className="luxuryCategoryCircle">
                 <div className="luxuryCategoryGlow"/>
-                <Icon size={42} strokeWidth={1.5}/>
+                <Icon size={38} strokeWidth={1.55}/>
               </div>
               <strong>{category}</strong>
               <span>Ver produtos →</span>
