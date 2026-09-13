@@ -1,87 +1,86 @@
-import { Header } from "@/components/Header";
-import { HomeHero } from "@/components/HomeHero";
-import { HomeCategories } from "@/components/HomeCategories";
-import { HomeProducts } from "@/components/HomeProducts";
-import {
-  Facebook,
-  Gift,
-  Heart,
-  Home as HomeIcon,
-  Instagram,
-  Menu,
-  MessageCircle,
-  ShieldCheck,
-  Truck,
-  UserRound,
-  Youtube
-} from "lucide-react";
-
 export default function Home() {
   return (
-    <main className="luxuryStore">
-      <Header />
-      <HomeHero />
-      <HomeCategories />
-      <HomeProducts />
+    <main
+      style={{
+        minHeight: "100svh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "24px",
+        background:
+          "radial-gradient(circle at top, rgba(190, 18, 60, 0.18), transparent 34%), #080808",
+        color: "#ffffff",
+        fontFamily: "Arial, Helvetica, sans-serif",
+      }}
+    >
+      <section
+        style={{
+          width: "100%",
+          maxWidth: "680px",
+          textAlign: "center",
+          padding: "48px 28px",
+          border: "1px solid rgba(255,255,255,0.12)",
+          borderRadius: "24px",
+          background: "rgba(255,255,255,0.04)",
+          boxShadow: "0 30px 80px rgba(0,0,0,0.45)",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          style={{
+            width: "74px",
+            height: "74px",
+            margin: "0 auto 24px",
+            borderRadius: "50%",
+            display: "grid",
+            placeItems: "center",
+            border: "1px solid rgba(255,255,255,0.14)",
+            background: "rgba(190,18,60,0.14)",
+            fontSize: "34px",
+          }}
+        >
+          !
+        </div>
 
-      <section className="luxuryTrustBar" id="discricao">
-        <div><Gift/><span><b>EMBALAGEM DISCRETA</b><small>Sua privacidade garantida</small></span></div>
-        <div><ShieldCheck/><span><b>PAGAMENTO SEGURO</b><small>Seus dados protegidos</small></span></div>
-        <div><Truck/><span><b>ENTREGA RÁPIDA</b><small>Para todo o Brasil</small></span></div>
-        <div><MessageCircle/><span><b>ATENDIMENTO VIA WHATSAPP</b><small>Tire suas dúvidas em tempo real</small></span></div>
+        <p
+          style={{
+            margin: "0 0 12px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            fontSize: "12px",
+            color: "#fb7185",
+            fontWeight: 700,
+          }}
+        >
+          Aviso
+        </p>
+
+        <h1
+          style={{
+            margin: "0",
+            fontSize: "clamp(34px, 7vw, 58px)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.04em",
+            fontWeight: 800,
+          }}
+        >
+          Site indisponível
+        </h1>
+
+        <p
+          style={{
+            margin: "22px auto 0",
+            maxWidth: "500px",
+            fontSize: "clamp(17px, 3vw, 21px)",
+            lineHeight: 1.6,
+            color: "rgba(255,255,255,0.74)",
+          }}
+        >
+          Falar com <strong style={{ color: "#ffffff" }}>Joabest</strong> para acessar.
+          <br />
+          Obrigado.
+        </p>
       </section>
-
-      <section className="luxuryPromoStrip" id="promocoes">
-        <div className="luxuryPromoCopy">
-          <span>OFERTA ESPECIAL</span>
-          <h2>Prazer, sofisticação e discrição em cada detalhe.</h2>
-          <p>Cadastre promoções, cupons e combos pelo painel administrativo.</p>
-        </div>
-        <a href="#destaques">VER OFERTAS</a>
-      </section>
-
-      <footer className="luxuryFooter" id="atendimento">
-        <div className="luxuryFooterBrand">
-          <div className="footerLogoTitle">CORDEIRO</div>
-          <div className="footerLogoSub">DE LUXXO • SEX SHOP</div>
-          <p>Prazer sem limites ♡</p>
-        </div>
-
-        <div>
-          <b>Institucional</b>
-          <a href="#">Sobre nós</a>
-          <a href="#">Política de privacidade</a>
-          <a href="#">Trocas e devoluções</a>
-          <a href="#">Termos de uso</a>
-        </div>
-
-        <div>
-          <b>Ajuda</b>
-          <a href="#">Central de atendimento</a>
-          <a href="#">Rastrear meu pedido</a>
-          <a href="#">Dúvidas frequentes</a>
-          <a href="#">Fale conosco</a>
-        </div>
-
-        <div>
-          <b>Formas de pagamento</b>
-          <div className="paymentRow">
-            <span>VISA</span><span>●●</span><span>PIX</span><span>ELO</span>
-          </div>
-          <b className="socialTitle">Acompanhe a gente</b>
-          <div className="socialRow">
-            <Instagram size={18}/><Facebook size={18}/><Youtube size={19}/>
-          </div>
-        </div>
-      </footer>
-
-      <nav className="luxuryMobileBottomNav" aria-label="Navegação mobile">
-        <a href="/"><HomeIcon size={20}/><span>Início</span></a>
-        <a href="#categorias"><Menu size={20}/><span>Categorias</span></a>
-        <a className="whatsappCenter" href="#atendimento"><MessageCircle size={23}/><span>WhatsApp</span></a>
-        <a href="#"><Heart size={20}/><span>Favoritos</span></a>
-        <a href="/admin"><UserRound size={20}/><span>Conta</span></a>
-      </nav>
     </main>
   );
 }
