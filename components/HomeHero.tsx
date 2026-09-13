@@ -12,9 +12,27 @@ export function HomeHero() {
   const { settings } = useShop();
 
   return (
-    <section className="hero luxuryHero">
-      <div className="luxuryHeroGlow"/>
-      <div className="heroContent luxuryHeroContent">
+    <section className="hero luxuryHero" style={{ position: "relative", overflow: "hidden" }}>
+      <img
+        src="https://unsplash.com/photos/NcxKjRwRIQg/download?force=true&w=1600"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center 35%",
+          opacity: 0.05,
+          filter: "blur(7px)",
+          transform: "scale(1.06)",
+          pointerEvents: "none",
+          zIndex: 0
+        }}
+      />
+      <div className="luxuryHeroGlow" style={{ position: "relative", zIndex: 1 }}/>
+      <div className="heroContent luxuryHeroContent" style={{ position: "relative", zIndex: 2 }}>
         <span className="luxuryHeroKicker">DESCUBRA UM</span>
         <h1>
           <span>MUNDO DE PRAZER</span>
@@ -34,7 +52,7 @@ export function HomeHero() {
         </a>
       </div>
 
-      <div className="luxuryHeroVisual">
+      <div className="luxuryHeroVisual" style={{ position: "relative", zIndex: 2 }}>
         <div className="luxuryHeroPhotoFrame">
           <img
             className="luxuryHeroPhoto"
