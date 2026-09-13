@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { HomeHero } from "@/components/HomeHero";
 import { HomeCategories } from "@/components/HomeCategories";
@@ -17,6 +20,18 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const goToTop = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    goToTop();
+    const frame = window.requestAnimationFrame(goToTop);
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <main className="luxuryStore">
       <Header />
